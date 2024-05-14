@@ -12,6 +12,7 @@
         <module>sqlparser4.5</module>
         <module>sqlparser4.7</module>
         <module>sqlparser-timeout</module>
+        <module>sqlparser4.9</module>
     </modules>
 
     <properties>

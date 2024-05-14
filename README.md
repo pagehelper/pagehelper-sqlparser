@@ -103,3 +103,26 @@ seconds):
     <version>6.1.0</version>
 </dependency>
 ```
+
+现在，我们也提供了对 jsqlparser 4.9 版本的支持。要使用 jsqlparser 4.9 版本的实现，可以按照下面的方式进行配置：
+
+```xml
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>6.1.0</version>
+    <exclusions>
+        <exclusion>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>sqlparser4.9</artifactId>
+    <version>6.1.0</version>
+</dependency>
+```
+
+This addition ensures that developers have the flexibility to choose the version of jsqlparser that best suits their needs, including the latest 4.9 version.
