@@ -21,7 +21,7 @@ public class TimeoutSqlParser implements SqlParser {
         Statement statement;
         Future<Statement> future = executorService.submit(() -> parser.Statement());
         try {
-            statement = future.get(100000, TimeUnit.MILLISECONDS);
+            statement = future.get(10000, TimeUnit.MILLISECONDS);
             return statement;
         } catch (TimeoutException var5) {
             parser.interrupted = true;
