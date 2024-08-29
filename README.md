@@ -1,6 +1,7 @@
 # 兼容 JSqlParser 多个版本的扩展实现
 
-为了兼容 jsqlparser 4.5 和 4.7，以及后续可能存在的其他版本，新建了一个 pagehelper-sqlparser 项目，目前提供了 4.5 和 4.7
+为了兼容 jsqlparser 4.5 和 4.7（支持4.8,4.9,5.0），以及后续可能存在的其他版本，新建了一个 pagehelper-sqlparser 项目，目前提供了
+4.5 和 4.7
 两个实现，
 使用时从 pagehelper 排除 jsqlparser，然后选择一个 jsqlparser 实现即可，当前版本默认使用的 4.7 版本的代码，
 因此如果想换 4.5 的实现，可以按照下面方式进行配置：
@@ -30,13 +31,10 @@ SPI 可以参考 pagehelper-sqlsource 模块代码。
 JSqlParser 默认解析 SQL 会使用临时创建的 `Executors.newSingleThreadExecutor()`，这里通过 API 跳过了线程池：
 
 ```java
-CCJSqlParser parser = CCJSqlParserUtil.newParser(statementReader);
+CCJSqlParser parser = CCJSqlParserUtil.newParser(sql);
 parser.
 
 withSquareBracketQuotation(true);
-return parser.
-
-Statement();
 ```
 
 JSqlParser 使用线程池的目的是为了防止解析超时，因此如果你遇到过超时的情况，可以引入下面的依赖（通过SPI覆盖了默认实现，超时时间10秒）：
@@ -87,13 +85,10 @@ By default, JSqlParser uses a temporarily created `Executors.newSingleThreadExec
 Here, the thread pool is bypassed through the API:
 
 ```java
-CCJSqlParser parser = CCJSqlParserUtil.newParser(statementReader);
+CCJSqlParser parser = CCJSqlParserUtil.newParser(sql);
 parser.
 
 withSquareBracketQuotation(true);
-return parser.
-
-Statement();
 ```
 
 The purpose of using a thread pool in JSqlParser is to prevent parsing timeouts. Therefore, if you have encountered
